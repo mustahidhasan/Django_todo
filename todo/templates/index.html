@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<!--
+Template Name: Chillaid
+Author: <a href="https://www.os-templates.com/">OS Templates</a>
+Author URI: https://www.os-templates.com/
+Copyright: OS-Templates.com
+Licence: Free to use under our free template licence terms
+Licence URI: https://www.os-templates.com/template-terms
+-->
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>To Do</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<style>
+.header_form{
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 10px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.form_body{
+  font-weight: bold;
+  font-size: medium;
+  padding: 10px;
+  
+}
+.form_body label{
+  margin: 2px;
+  text-align: center;
+}
+.form_body input{
+  padding: 5px;
+  border-radius:10px ;
+  margin: auto;
+  
+}
+#sub{
+  margin-top: 5px;
+  background-color: darkcyan;
+  color: aliceblue;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+#done_btn{
+  background-color: #f44336; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-top: 5px;;
+}
+
+</style>
+
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+
+<div class="wrapper row1">
+  <header id="header" class="hoc clear">
+    <div id="logo" class="fl_left"> 
+      <!-- ################################################################################################ -->
+      <h1 class="logoname"><a href="/"><span>To</span>Do</a></h1>
+      <!-- ################################################################################################ -->
+    </div>
+  </header>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<div class="wrapper row3">
+  
+  <main class="hoc container clear"> 
+   <h2 class="header_form">Fill The Form TO Add Task</h2>
+  <form action="add_task" class="form_body" method="POST">
+    {% csrf_token %}
+    <label for="Task_name">Task Name:</label>
+    <input type="text" name="Task_name" placeholder="Enter The Task Name">
+
+    <label for="date">Date:</label>
+    <input type="date" name="date"> 
+
+    <label for="Time">Time:</label>
+    <input type="time" name="Time"> 
+
+    <label for="des">Description:</label>
+    <input type="text" name="des"> 
+
+    <input id = "sub" type="submit">
+
+  </form>
+       
+    <div class="clear"></div>
+  </main>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="bgded overlay light" style="background-image:url('images/demo/backgrounds/01.png');">
+  <section id="services" class="hoc container clear"> 
+    <!-- ################################################################################################ -->
+    <div class="sectiontitle">
+      <h6 class="heading font-x2">Pending Task</h6>
+    </div>
+    <ul class="nospace group elements elements-three">
+      {% for i in t %}
+      <li class="one_third">
+        <article><a href="#"><i class="fas fa-hourglass-half"></i></a>
+          <h6 class="heading">{{i.task_name}}</h6>
+          <p>{{i.task_date}}</p>
+          <p>{{i.task_time}}</p>
+          <p>{{i.task_des}}</p>
+          <form action="work_done" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" id="" value="{{i.id}}">
+            <input id="done_btn" type="submit", value="Done">
+          </form>
+        </article>
+      </li>
+      {% endfor %}
+    </ul>
+    <!-- ################################################################################################ -->
+  </section>
+</div>
+
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear"> 
+    <!-- ################################################################################################ -->
+    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#"></a></p>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="{% static 'layout/scripts/jquery.min.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{% static 'layout/scripts/jquery.mobilemenu.js' %}"></script>
+<!-- Homepage specific -->
+<script src="{% static 'layout/scripts/jquery.easypiechart.min.js' %}"></script>
+<!-- / Homepage specific -->
+</body>
+</html>
